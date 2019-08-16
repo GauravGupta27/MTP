@@ -1,0 +1,20 @@
+h1 timeout 198 sudo tcpdump -w 1_0_h1.pcap &
+h2 timeout 198 sudo tcpdump -w 1_0_h2.pcap &
+h3 timeout 198 sudo tcpdump -w 1_0_h3.pcap &
+h4 timeout 198 sudo tcpdump -w 1_0_h4.pcap &
+h5 timeout 198 sudo tcpdump -w 1_0_h5.pcap &
+h6 timeout 198 sudo tcpdump -w 1_0_h6.pcap &
+h4 python utility_scripts/vlc_rec.py 1_0_l_hd_1.mp4 198 9004 &
+h4 python utility_scripts/vlc_rec.py 1_0_l_hd_2.mp4 198 5004 &
+h5 python utility_scripts/vlc_rec.py 1_0_l_sd_1.mp4 198 9004 &
+h5 python utility_scripts/vlc_rec.py 1_0_l_sd_2.mp4 198 5004 &
+h6 ./utility_scripts/tcp_rec 0 dummy
+h6 ./utility_scripts/tcp_rec 0 dummy
+h1 ping -c 3 h1
+sh nohup timeout 195 sudo python exp_monitor.py -e 1 -n 0 > /dev/null 2>&1 &
+h1 python utility_scripts/vlc_snd.py ~/Videos/hd_1_184sec.mp4 10.0.0.4 195 9004 &
+h1 python utility_scripts/vlc_snd.py ~/Videos/hd_2_179sec.mp4 10.0.0.4 195 5004 &
+h2 python utility_scripts/vlc_snd.py ~/Videos/sd_1_180sec.mp4 10.0.0.5 195 9004 &
+h2 python utility_scripts/vlc_snd.py ~/Videos/sd_2_187sec.mp4 10.0.0.5 195 5004 &
+h3 ./utility_scripts/tcp_snd 10.0.0.6 0 190 dummy
+h3 ./utility_scripts/tcp_snd 10.0.0.6 0 190 dummy

@@ -1,0 +1,22 @@
+h1 mkdir -p pcapfiles
+h2 mkdir -p pcapfiles
+h7 mkdir -p pcapfiles
+h8 mkdir -p pcapfiles
+h1 timeout 198 sudo tcpdump -w pcapfiles/1_0_h1.pcap &
+h2 timeout 198 sudo tcpdump -w pcapfiles/1_0_h2.pcap &
+h7 timeout 198 sudo tcpdump -w pcapfiles/1_0_h7.pcap &
+h8 timeout 198 sudo tcpdump -w pcapfiles/1_0_h8.pcap &
+h1 mkdir -p videos
+h2 mkdir -p videos
+h7 mkdir -p videos
+h8 mkdir -p videos
+h7 python utility_scripts/vlc_rec.py videos/1_0_l_hd_1.mp4 198 9004 &
+h7 python utility_scripts/vlc_rec.py videos/1_0_l_hd_2.mp4 198 5004 &
+h8 ./utility_scripts/tcp_rec 0 dummy
+h8 ./utility_scripts/tcp_rec 0 dummy
+h1 ping -c 3 h1
+sh nohup timeout 195 sudo python exp_monitor.py -e 1 -n 0 > /dev/null 2>&1 &
+h1 python utility_scripts/vlc_snd.py ~/Videos/hd_1_184sec.mp4 10.0.0.7 195 9004 &
+h1 python utility_scripts/vlc_snd.py ~/Videos/hd_2_179sec.mp4 10.0.0.7 195 5004 &
+h2 ./utility_scripts/tcp_snd 10.0.0.8 0 190 dummy
+h2 ./utility_scripts/tcp_snd 10.0.0.8 0 190 dummy

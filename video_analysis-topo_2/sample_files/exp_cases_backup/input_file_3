@@ -1,0 +1,22 @@
+# Number of background TCP connections
+0
+# Sender 1 | Video file | Streaming duration (sec) | Receiver 1
+h1
+~/Videos/hd_1_184sec.mp4
+195
+h4
+# Sender 3 | Video file | Streaming duration (sec) | Receiver 3
+h1
+~/Videos/hd_2_179sec.mp4
+195
+h4
+# Sender 1 | Video file | Streaming duration (sec) | Receiver 2
+h2
+~/Videos/sd_1_180sec.mp4
+195
+h8
+# Sender 4 | Video file | Streaming duration (sec) | Receiver 4
+h2
+~/Videos/sd_2_187sec.mp4
+195
+h8
